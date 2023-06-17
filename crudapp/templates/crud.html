@@ -1,0 +1,90 @@
+{% extends 'navbar.html' %}
+
+
+{% block content %}
+<h1 class="text-center my-4">Welcome to the Crud App</h1>
+<hr>
+<!-- Modal -->
+{% for i in info %}
+<div class="modal fade" id="crudModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Update details</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+<form action="/update/{{i.id}}", method="post">
+  {% csrf_token %}
+    <div class="md-3">
+    <label for="exampleInputEmail1" class="form-label">Roll</label>
+    <input type="text" class="form-control" value="{{i.roll}}" name="roll" id="" placeholder="Your roll">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Name</label>
+    <input type="text" class="form-control" value="{{i.name}}" name="name" id="" placeholder="Enter your Name" required>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email</label>
+    <input type="email" class="form-control" name="email" value="{{i.email}}" id="" placeholder="Enter your email" required>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Phone(optional)</label>
+    <input type="number" class="form-control" name="phone" value="{{i.phone}}" id="" placeholder="Enter your email" required>
+  </div>
+  <div class="mb-3">
+  <label for="exampleFormControlTextarea1" class="form-label">Address</label>
+  <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="3">{{i.address}}</textarea>
+</div>
+<button type="submit" class="btn btn-outline-primary">Update</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+{% endfor %}
+
+{% comment %} Tables------ {% endcomment %}
+<div class="container">
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Sno.</th>
+      <th scope="col">Roll</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Address</th>
+      <th scope="col">Action</th>
+
+
+    </tr>
+  </thead>
+  <tbody>
+    {% if request.user.is_authenticated %}
+    {% for i in info %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{i.roll}}</td>
+      <td>{{i.name}}</td>
+      <td>{{i.email}}</td>
+      <td>{{i.phone}}</td>
+      <td>{{i.address}}</td>
+      <td>
+        <a href="/update/{{i.id}}" class="btn btn-warning" data-bs-toggle="modal"  data-bs-target="#crudModal">Edit</a>
+        <a href="/delete/{{i.id}}" class="btn btn-outline-danger">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  {% else %}
+</table>
+<h1>Please Login To See The Notes</h1>
+{% endif %}
+</div>
+
+
+{% endblock content %}

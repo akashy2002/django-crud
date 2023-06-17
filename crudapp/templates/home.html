@@ -1,0 +1,40 @@
+{% extends 'navbar.html' %}
+
+
+{% block content %}
+<h1 class="text-center my-4">Welcome To The Crud App</h1>
+<hr>
+<div class="container my-4">
+<form action="{% url 'crudpage' %}", method="post">
+  {% csrf_token %}
+    <div class="md-3">
+    <label for="exampleInputEmail1" class="form-label">Roll</label>
+    <input type="text" class="form-control" name="roll" id="" placeholder="Your roll">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Name</label>
+    <input type="text" class="form-control" name="fname" id="" placeholder="Enter your Name" required>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email</label>
+    <input type="email" class="form-control" name="email" id="" placeholder="Enter your email" required>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Phone(optional)</label>
+    <input type="number" class="form-control" name="phone" id="" placeholder="Enter your email" required>
+  </div>
+  <div class="mb-3">
+  <label for="exampleFormControlTextarea1" class="form-label">Address</label>
+  <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="3"></textarea>
+</div>
+{% if request.user.is_authenticated %}
+<button type="submit" class="btn btn-primary">Submit</button>
+{% else %}
+<a href="/login" class="btn btn-primary">Submit</a>
+{% endif %}
+</form>
+</div>
+
+
+
+{% endblock content %}

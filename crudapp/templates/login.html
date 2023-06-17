@@ -1,0 +1,25 @@
+{% extends 'navbar.html' %}
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+
+<div class="container my-4">
+  <h2>Login Page</h2>
+  <hr>
+    <form action="/login" method="post">
+        {% csrf_token %}
+    <div class="mb-3">
+    <label for="username" class="form-label">Username</label>
+    <input type="text" class="form-control" name="lusername" aria-describedby="emailHelp" placeholder="Username">
+  </div>
+  
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input type="password" class="form-control" name="lpassword" placeholder="password">
+  </div>
+  
+  <button type="submit" class="btn btn-success">Login</button>
+</form>
+</div>
+
+{% endblock content %}

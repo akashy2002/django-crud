@@ -1,0 +1,32 @@
+{% extends 'navbar.html' %}
+{% block title %}Signup{% endblock title %}
+
+{% block content %}
+
+<div class="container my-4">
+  <h2>Signup Page</h2>
+<hr>
+    <form action="/signup" method="post">
+        {% csrf_token %}
+    <div class="mb-3">
+    <label for="username" class="form-label">Username</label>
+    <input type="text" class="form-control" name="username" aria-describedby="emailHelp" placeholder="Username">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Email</label>
+    <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Email">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Password</label>
+    <input type="password" class="form-control" name="password" placeholder="password">
+  </div>
+   <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+    <input type="password" class="form-control" name="password2" placeholder="Confirm Password">
+  </div>
+  
+  <button type="submit" class="btn btn-success">Signup</button>
+</form>
+</div>
+
+{% endblock content %}
