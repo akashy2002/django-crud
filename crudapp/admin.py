@@ -5,4 +5,4 @@ from .models import *
 
 
 admin.site.register(Crudcard)
-# admin.site.register(Registration)
+admin.site.register(Registration)

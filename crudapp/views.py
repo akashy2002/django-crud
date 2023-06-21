@@ -74,9 +74,12 @@ def handlesignup(request):
     if request.method == "POST":
         username = request.POST['username']
         email = request.POST['email']
+        up_pic = request.POST['file']
         pass1 = request.POST['password']
         pass2 = request.POST['password2']
 
+        userpic = Registration(up_pic=up_pic)
+        userpic.save()
         # user chcek validation-----
         if len(username) > 10:
             messages.error(request, 'Username should be under 10 characters')
@@ -90,6 +93,7 @@ def handlesignup(request):
         # myuser.first_name = fname
         # myuser.last_name = lname
         myuser.save()
+
         messages.success(request, 'Congrats! Your account has been created ')
         return redirect('home')
 
@@ -103,6 +107,7 @@ def handleLogin(request):
         lpassword = request.POST['lpassword']
 
         user = authenticate(username=lusername, password=lpassword)
+
         if user is not None:
             login(request, user)
             messages.success(request, 'Successfully Loged In')
@@ -120,3 +125,9 @@ def handleLogout(request):
     logout(request)
     messages.success(request, 'Successfully Loged Out')
     return redirect('LoginPage')
+
+
+def userimg(request):
+
+    userpic = Registration.objects.get(id=id)
+    request.session['uppic'] = userpic
